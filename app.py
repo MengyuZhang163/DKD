@@ -122,7 +122,7 @@ st.markdown("""
     border-color: rgba(0, 201, 177, 0.3);
 }
 
-/* Streamlit Inputs */
+/* Streamlit Inputs — Labels */
 .stNumberInput label, .stSelectbox label, .stSlider label {
     font-family: 'Crimson Pro', serif !important;
     font-size: 1rem !important;
@@ -130,17 +130,50 @@ st.markdown("""
     font-weight: 400 !important;
 }
 
-.stNumberInput input, .stSelectbox select {
-    background: rgba(255,255,255,0.05) !important;
-    border: 1px solid rgba(0, 201, 177, 0.2) !important;
+/* Number Input — kill white backgrounds at every level */
+.stNumberInput > div,
+.stNumberInput > div > div,
+.stNumberInput > div > div > div {
+    background-color: #162535 !important;
+    background: #162535 !important;
+}
+
+/* The actual <input> element */
+.stNumberInput input {
+    background-color: #162535 !important;
+    background: #162535 !important;
+    border: 1px solid rgba(0, 201, 177, 0.25) !important;
     border-radius: 8px !important;
     color: var(--soft-white) !important;
     font-family: 'Space Mono', monospace !important;
+    font-size: 0.85rem !important;
 }
 
 .stNumberInput input:focus {
     border-color: var(--accent-teal) !important;
     box-shadow: 0 0 0 2px rgba(0, 201, 177, 0.15) !important;
+    outline: none !important;
+}
+
+/* Number input +/- buttons */
+.stNumberInput button {
+    background-color: #1e3550 !important;
+    border: 1px solid rgba(0, 201, 177, 0.2) !important;
+    color: var(--accent-teal) !important;
+}
+
+.stNumberInput button:hover {
+    background-color: #243f63 !important;
+    border-color: var(--accent-teal) !important;
+}
+
+/* Selectbox */
+[data-testid="stSelectbox"] > div > div,
+[data-testid="stSelectbox"] > div > div > div {
+    background-color: #162535 !important;
+    border: 1px solid rgba(0, 201, 177, 0.25) !important;
+    border-radius: 8px !important;
+    color: var(--soft-white) !important;
 }
 
 /* Buttons */
@@ -257,12 +290,6 @@ hr {
     color: var(--soft-white);
     font-family: 'Crimson Pro', serif;
     font-size: 1rem;
-}
-
-[data-testid="stSelectbox"] > div > div {
-    background: rgba(255,255,255,0.05) !important;
-    border: 1px solid rgba(0, 201, 177, 0.2) !important;
-    color: var(--soft-white) !important;
 }
 
 /* Slider */
@@ -576,7 +603,7 @@ with tab1:
                          f'{val:+.3f}', ha=ha, va='center',
                          color='white', fontsize=7, fontfamily='monospace')
 
-            ax2.axvline(0, color='rgba(255,255,255,0.2)', linewidth=0.8, linestyle='--')
+            ax2.axvline(0, color=(1, 1, 1, 0.2), linewidth=0.8, linestyle='--')
             ax2.set_facecolor('none')
             ax2.spines['top'].set_visible(False)
             ax2.spines['right'].set_visible(False)
@@ -644,7 +671,7 @@ with tab2:
 
         ax3.barh(sorted_features, sorted_coef, color=bar_colors, alpha=0.8,
                   height=0.6, edgecolor='none')
-        ax3.axvline(0, color='rgba(255,255,255,0.15)', linewidth=1)
+        ax3.axvline(0, color=(1, 1, 1, 0.15), linewidth=1)
         ax3.set_facecolor('none')
         for spine in ax3.spines.values():
             spine.set_color('#2a4060')
